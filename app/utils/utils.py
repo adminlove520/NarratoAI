@@ -15,6 +15,7 @@ from datetime import datetime, timedelta
 from app.models import const
 from app.utils import check_script
 from app.services import material
+from app.models.schema import VideoClipParams
 
 urllib3.disable_warnings()
 
@@ -56,7 +57,7 @@ def to_json(obj):
         # 使用serialize函数处理输入对象
         serialized_obj = serialize(obj)
 
-        # 序列化处理后的对象为JSON���符串
+        # 序列化处理后的对象为JSON符串
         return json.dumps(serialized_obj, ensure_ascii=False, indent=4)
     except Exception as e:
         return None
@@ -396,8 +397,6 @@ def cut_video(params, progress_callback=None):
         
         total_clips = len(time_list)
 
-        print("time_list", time_list)
-        
         def clip_progress(current, total):
             progress = int((current / total) * 100)
             if progress_callback:
@@ -415,17 +414,13 @@ def cut_video(params, progress_callback=None):
 
         st.session_state['subclip_videos'] = subclip_videos
 
-        print("list:", subclip_videos)
-
         for i, video_script in enumerate(video_script_list):
-            print(i)
-            print(video_script)
             try:
                 video_script['path'] = subclip_videos[video_script['timestamp']]
             except KeyError as err:
                 logger.error(f"裁剪视频失败: {err}")
-                # raise ValueError(f"裁剪视频失败: {err}")
-
+        logger.debug(f"裁剪视频成功，共生成 {total_clips} 个视频片段")
+        logger.debug(f"视频片段路径: {subclip_videos}")
         return task_id, subclip_videos
 
     except Exception as e:
@@ -461,7 +456,7 @@ def clear_keyframes_cache(video_path: str = None):
             return
             
         if video_path:
-            # ���理指定视频的缓存
+            # 理指定视频的缓存
             video_hash = md5(video_path + str(os.path.getmtime(video_path)))
             video_keyframes_dir = os.path.join(keyframes_dir, video_hash)
             if os.path.exists(video_keyframes_dir):
