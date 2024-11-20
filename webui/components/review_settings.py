@@ -72,14 +72,21 @@ def render_video_item(tr, video_list, subclip_videos, index):
         video_script['narration'] = narration
         st.session_state['video_clip_json'] = video_list
     
-    # 显示剪辑模式
+    # 修改 selectbox 的实现
+    ost_options = [tr('keep_original_sound'), tr('mute')]
+    default_index = 0  # 设置默认值为0
+    
     ost = st.selectbox(
-        tr("Clip Mode"),
-        options=range(1, 10),
-        index=video_script.get('OST', 1) - 1,
+        tr('sound_settings'),
+        options=ost_options,
+        index=default_index,  # 使用安全的默认索引
         key=f"ost_{index}"
     )
+    
+    # 将选择转换为布尔值
+    keep_original_sound = (ost == tr('keep_original_sound'))
+    
     # 保存修改后的剪辑模式
-    if ost != video_script.get('OST', 1):
-        video_script['OST'] = ost
+    if keep_original_sound != video_script.get('keep_original_sound', True):
+        video_script['keep_original_sound'] = keep_original_sound
         st.session_state['video_clip_json'] = video_list

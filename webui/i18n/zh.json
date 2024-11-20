@@ -15,7 +15,7 @@
     "Crop Video": "裁剪视频",
     "Video File": "视频文件（:blue[1️⃣支持上传视频文件(限制2G) 2️⃣大文件建议直接导入 ./resource/videos 目录]）",
     "Plot Description": "剧情描述 (:blue[可从 https://www.tvmao.com/ 获取])",
-    "Generate Video Keywords": "点击使用AI根据**文案**生成【视频关键��】",
+    "Generate Video Keywords": "点击使用AI根据**文案**生成【视频关键】",
     "Please Enter the Video Subject": "请先填写视频文案",
     "Generating Video Script and Keywords": "AI正在生成视频文案和关键词...",
     "Generating Video Keywords": "AI正在生成视频关键词...",
@@ -96,7 +96,7 @@
     "Check Format": "脚本格式检查",
     "Script Loaded Successfully": "脚本加载成功",
     "Script format check passed": "脚本格式检查通过",
-    "Script format check failed": "脚本格式检查失��",
+    "Script format check failed": "脚本格式检查失败",
     "Failed to Load Script": "加载脚本失败",
     "Failed to Save Script": "保存脚本失败",
     "Script saved successfully": "脚本保存成功",
@@ -131,6 +131,9 @@
     "gemini model is not available": "Gemini 模型不可用",
     "NarratoAPI is available": "NarratoAPI 可用",
     "NarratoAPI is not available": "NarratoAPI 不可用",
-    "Unsupported provider": "不支持的提供商"
+    "Unsupported provider": "不支持的提供商",
+    "keep_original_sound": "保留原声",
+    "mute": "静音",
+    "sound_settings": "声音设置"
   }
 }
